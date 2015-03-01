@@ -8,22 +8,31 @@ def get_ghname():
     """
     Returns the Ghanaian name of the user when based on inputted birthdate. When user answers yes, the meaning of the name will be displayed
     """
-    birthday_str = input('Enter birthday (format mm/dd/yyyy): ')
-    gender = input('Enter your gender (male or female): ')
-    bth_weekday = date_week_born.get_day(birthday_str)
 
     #Place Day and Name in dictonaries, one for male and female
     fem_gh_name = {"Monday": "Adwoa", "Tuesday": "Abena", "Wednesday": "Akua", "Thursday": "Yaa", "Friday": "Afua", "Saturday": "Ama", "Sunday": "Akosua"}
     male_gh_name = {"Monday": "Kwadwo/Kojo", "Tuesday": "Kwabena", "Wednesday": "Kwaku", "Thursday": "Yaw", "Friday": "Kofi", "Saturday": "Kwame", "Sunday": "Akwasi/Kwesi"}
 
+    birthday_str = input('Enter birthday (format mm/dd/yyyy): ')
+    bth_weekday = date_week_born.get_day(birthday_str)
+    gender = input('Enter your gender (male or female) No extra spaces: ')
+
+    # Print the name /Day based on  gender. Also validate if the user entered a valid answer.  If not, user will be prompted again.
+    while True:
+        if gender in( 'male', 'female'):
+            if gender == 'female':
+               print("Since you were born on %s, your Akan name is %s" % (bth_weekday, fem_gh_name[bth_weekday]))
+            else:
+               print("Since you were born on %s, your Akan name is %s" % (bth_weekday, male_gh_name[bth_weekday]))
+            break
+        else:
+            print("Please enter a valid answer for gender(female or male)")
+            gender = input('Enter your gender (male or female): ')
+
+
     print("You were born on a %s" % bth_weekday)
 
     # Based on gender,  return the name that corresponds to birthdate
-
-    if gender == 'female':
-        print("Since you were born on %s, your Akan name is %s" % (bth_weekday, fem_gh_name[bth_weekday]))
-    else:
-        print("Since you were born on %s, your Akan name is %s" % (bth_weekday, male_gh_name[bth_weekday]))
 
     choice = input("Would you like to know the meaning of your Akan name (y or n): ")
     while True:
